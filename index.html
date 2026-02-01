@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AI Mock Interview — MVP</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar" role="banner">
+      <div class="brand">
+        <h1>Mock Interview — MVP</h1>
+        <p class="subtitle">Frontend-only, deterministic, and explainable</p>
+      </div>
+      <div class="controls">
+        <button id="themeToggle" class="btn small" aria-pressed="false">🌙 Night</button>
+      </div>
+    </header>
+
+    <main class="main" role="main">
+      <section class="left" aria-label="Candidate input">
+        <div class="card">
+          <h2>Candidate Input</h2>
+
+          <label class="label">Upload resume (.txt or .md)</label>
+          <div class="row input-row">
+            <input id="resumeFile" type="file" accept=".txt,.md,text/plain" aria-label="Upload resume file"/>
+            <span id="resumeFileName" class="muted">No file chosen</span>
+          </div>
+
+          <div class="row" style="margin-top:8px;">
+            <button id="sampleFill" class="btn small" aria-label="Fill sample resume and JD">Fill sample</button>
+          </div>
+
+          <small class="muted">Or paste your resume below</small>
+          <textarea id="resume" placeholder="Paste resume text here..." aria-label="Resume text"></textarea>
+
+          <label class="label">Job Description (JD)</label>
+          <textarea id="jd" placeholder="Paste job description here..." aria-label="Job description"></textarea>
+
+          <div class="row">
+            <label>Time / Q (sec):
+              <input id="timePerQ" type="number" value="90" min="10" aria-label="Time per question in seconds">
+            </label>
+            <label>Max Q:
+              <input id="maxQ" type="number" value="6" min="1" max="100" aria-label="Maximum number of questions">
+            </label>
+          </div>
+
+          <div class="row">
+            <button id="startBtn" class="btn primary" aria-label="Start interview">Start Interview</button>
+            <button id="resetBtn" class="btn" aria-label="Reset application">Reset</button>
+          </div>
+          <p class="hint">If resume is a PDF, copy-paste its text into the resume box (PDF parsing not included).</p>
+        </div>
+
+        <div class="card small" id="metaCard" aria-live="polite">
+          <h3>JD Match</h3>
+          <div id="jdMatch" class="muted">—</div>
+          <div id="topKeywords" class="keywords" aria-label="Top job keywords"></div>
+        </div>
+      </section>
+
+      <section class="right" aria-label="Interview area">
+        <div class="card" id="interviewCard" style="display:none;">
+          <div class="metaBar">
+            <div id="progress">Q <span id="qIndex">0</span>/<span id="qMax">0</span></div>
+            <div id="timer">⏱ <span id="timeLeft">0</span>s</div>
+          </div>
+
+          <div id="progressBar" class="progressBar" aria-hidden="true">
+            <div id="progressFill" class="progressFill" style="width:0%"></div>
+          </div>
+
+          <div id="questionText" class="question">Question will appear here</div>
+          <div id="whyQuestion" class="muted" style="margin-bottom:8px"></div>
+          <textarea id="answer" placeholder="Type your answer here..." aria-label="Your answer"></textarea>
+
+          <div class="row">
+            <button id="submitAnswer" class="btn primary" aria-label="Submit answer">Submit Answer</button>
+            <button id="endEarly" class="btn" aria-label="End interview early">End Interview</button>
+          </div>
+          <div id="liveScore" class="liveScore" aria-live="polite"></div>
+        </div>
+
+        <div class="card" id="resultCard" style="display:none;" aria-live="polite">
+          <h2>Result</h2>
+          <div id="finalScore" class="finalScore" role="status"></div>
+          <div id="feedbackText" class="feedbackText"></div>
+
+          <div class="small-row">
+            <button id="downloadJson" class="btn" aria-label="Download JSON result">Download JSON (for judges)</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>Built for Hack2Hire — MVP. Frontend-only and extendable later.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
